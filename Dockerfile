@@ -2,7 +2,7 @@ FROM genkaok/php7.0-apache2
 
 # PhalconPHP
 RUN wget https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh && bash script.deb.sh
-RUN apt-get update && apt-get install php7.0-phalcon
+RUN apt-get update && apt-get install git php7.0-phalcon -y
 
 # Locales
 RUN apt-get install locales && echo "Europe/Moscow" > /etc/timezone && \
