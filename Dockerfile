@@ -43,6 +43,8 @@ RUN set -xe && \
             ${PWD}/cphalcon-${PHALCON_VERSION}/build/${PHALCON_EXT_PATH}/php7/64bits/ \
         && \
         pecl install rar && \
+        docker-php-ext-install mysqli && \
+        docker-php-ext-enable mysqli rar && \
         # Remove all temp files
         rm -r \
             ${PWD}/v${PSR_VERSION}.tar.gz \
