@@ -43,8 +43,9 @@ RUN set -xe && \
             ${PWD}/cphalcon-${PHALCON_VERSION}/build/${PHALCON_EXT_PATH}/php7/64bits/ \
         && \
         pecl install rar && \
+        pecl install apcu && \
         docker-php-ext-install pdo_mysql mysqli && \
-        docker-php-ext-enable pdo_mysql mysqli rar && \
+        docker-php-ext-enable pdo_mysql mysqli rar apcu && \
         # Remove all temp files
         rm -r \
             ${PWD}/v${PSR_VERSION}.tar.gz \
