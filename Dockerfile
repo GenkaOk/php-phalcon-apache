@@ -5,12 +5,20 @@ ARG PHALCON_VERSION=3.4.5
 
 RUN rm /etc/apt/preferences.d/no-debian-php
 RUN set -xe && \
-        apt-get update && apt-get install -y \
+        DEBIAN_FRONTEND=noninteractive && \
+        apt-get update && apt-get install -yq \
             git \
+            libpng-dev \
+            zlib1g-dev \
+            libwebp-dev \
+            libjpeg62-turbo-dev \
+            libxpm-dev \
+            libfreetype6-dev \
+            libxml2-dev \
+            libgeoip-dev  \
             php7.0-dev \
             php7.0-cli \
             php7.0-apcu \
-            php7.0-gd \
             php7.0-json \
             php7.0-ldap \
             php7.0-mbstring \
@@ -31,39 +39,38 @@ RUN set -xe && \
             php7.0-imap \
             php7.0-mcrypt \
             php7.0-redis \
-            php7.0-xmlrpc && \
-        # Download PSR, see https://github.com/jbboehr/php-psr
-        curl -LO https://github.com/jbboehr/php-psr/archive/v${PSR_VERSION}.tar.gz && \
+            php7.0-xmlrpc \
+        && rm -rf /var/lib/apt/lists/*
+
+# Download PSR, see https://github.com/jbboehr/php-psr
+RUN curl -LO https://github.com/jbboehr/php-psr/archive/v${PSR_VERSION}.tar.gz && \
         tar xzf ${PWD}/v${PSR_VERSION}.tar.gz && \
         # Download Phalcon
         curl -LO https://github.com/phalcon/cphalcon/archive/v${PHALCON_VERSION}.tar.gz && \
         tar xzf ${PWD}/v${PHALCON_VERSION}.tar.gz && \
         docker-php-ext-install -j $(getconf _NPROCESSORS_ONLN) \
             ${PWD}/php-psr-${PSR_VERSION} \
-            ${PWD}/cphalcon-${PHALCON_VERSION}/build/${PHALCON_EXT_PATH}/php7/64bits/ \
-        && \
-        pecl install rar && \
-        pecl install apcu && \
-        docker-php-ext-install pdo_mysql mysqli && \
-        docker-php-ext-enable pdo_mysql mysqli rar apcu && \
+            ${PWD}/cphalcon-${PHALCON_VERSION}/build/${PHALCON_EXT_PATH}/php7/64bits/ && \
         # Remove all temp files
         rm -r \
             ${PWD}/v${PSR_VERSION}.tar.gz \
             ${PWD}/php-psr-${PSR_VERSION} \
             ${PWD}/v${PHALCON_VERSION}.tar.gz \
-            ${PWD}/cphalcon-${PHALCON_VERSION} \
-        && \
-        php -m
+            ${PWD}/cphalcon-${PHALCON_VERSION}
 
-# PhalconPHP
-#RUN wget https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh && bash script.deb.sh
-#RUN apt-get update && apt-get install git php7.0-phalcon -y
+RUN docker-php-ext-install gd pdo_mysql mysqli soap
+
+RUN pecl install rar
+RUN pecl install apcu
+
+RUN docker-php-ext-enable rar apcu && \
+    phpenmod pdo pdo_mysql soap apcu mysqli zip && \
+    a2enmod rewrite headers && \
+    php -m
 
 # Locales
 RUN echo "Europe/Moscow" > /etc/timezone && \
     dpkg-reconfigure -f noninteractive tzdata
-
-RUN a2enmod rewrite headers
 
 # Install parallel composer module
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
