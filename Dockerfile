@@ -16,6 +16,7 @@ RUN set -xe && \
             libfreetype6-dev \
             libxml2-dev \
             libgeoip-dev  \
+            unzip \
             php7.0-dev \
             php7.0-cli \
             php7.0-apcu \
@@ -27,7 +28,6 @@ RUN set -xe && \
             php7.0-sqlite3 \
             php7.0-xml \
             php7.0-xsl \
-            php7.0-zip \
             php7.0-soap \
             php7.0-opcache \
             php7.0-pdo \
@@ -58,7 +58,7 @@ RUN curl -LO https://github.com/jbboehr/php-psr/archive/v${PSR_VERSION}.tar.gz &
             ${PWD}/v${PHALCON_VERSION}.tar.gz \
             ${PWD}/cphalcon-${PHALCON_VERSION}
 
-RUN docker-php-ext-install gd pdo_mysql mysqli soap
+RUN docker-php-ext-install gd pdo_mysql mysqli soap zip
 
 RUN pecl install rar
 RUN pecl install apcu
