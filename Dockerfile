@@ -58,12 +58,12 @@ RUN curl -LO https://github.com/jbboehr/php-psr/archive/v${PSR_VERSION}.tar.gz &
             ${PWD}/v${PHALCON_VERSION}.tar.gz \
             ${PWD}/cphalcon-${PHALCON_VERSION}
 
-RUN docker-php-ext-install gd pdo_mysql mysqli soap zip
+RUN docker-php-ext-install gd pdo_mysql mysqli soap zip sockets
 
 RUN pecl install rar
 RUN pecl install apcu
 
-RUN docker-php-ext-enable rar apcu && \
+RUN docker-php-ext-enable rar apcu sockets && \
     phpenmod pdo pdo_mysql soap apcu mysqli zip && \
     a2enmod rewrite headers && \
     php -m
