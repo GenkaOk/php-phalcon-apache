@@ -6,7 +6,6 @@ A Docker image based on php7.0-apache
 Extra library: 
 - Git `git rsync openssh-client`
 - PHP Framework Phalcon `php7.0-phalcon`
-- composer library `hirak/prestissimo`
 
 Tags
 -----

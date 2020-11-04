@@ -40,6 +40,7 @@ RUN set -xe && \
             php7.0-mcrypt \
             php7.0-redis \
             php7.0-xmlrpc \
+            php7.0-intl \
         && rm -rf /var/lib/apt/lists/*
 
 # Download PSR, see https://github.com/jbboehr/php-psr
@@ -74,5 +75,4 @@ RUN echo "Europe/Moscow" > /etc/timezone && \
 
 # Install parallel composer module
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
-    php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
-    composer global require hirak/prestissimo
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer
