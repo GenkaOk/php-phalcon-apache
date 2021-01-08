@@ -1,4 +1,4 @@
-FROM php:7.0-apache
+FROM php:7.3-apache
 
 ARG PSR_VERSION=1.0.0
 ARG PHALCON_VERSION=3.4.5
@@ -17,30 +17,30 @@ RUN set -xe && \
             libxml2-dev \
             libgeoip-dev  \
             unzip \
-            php7.0-dev \
-            php7.0-cli \
-            php7.0-apcu \
-            php7.0-json \
-            php7.0-ldap \
-            php7.0-mbstring \
-            php7.0-mysql \
-            php7.0-pgsql \
-            php7.0-sqlite3 \
-            php7.0-xml \
-            php7.0-xsl \
-            php7.0-soap \
-            php7.0-opcache \
-            php7.0-pdo \
-            php7.0-curl \
-            php7.0-igbinary \
-            php7.0-bz2 \
-            php7.0-geoip \
-            php7.0-imagick \
-            php7.0-imap \
-            php7.0-mcrypt \
-            php7.0-redis \
-            php7.0-xmlrpc \
-            php7.0-intl \
+            php7.3-dev \
+            php7.3-cli \
+            php7.3-apcu \
+            php7.3-json \
+            php7.3-ldap \
+            php7.3-mbstring \
+            php7.3-mysql \
+            php7.3-pgsql \
+            php7.3-sqlite3 \
+            php7.3-xml \
+            php7.3-xsl \
+            php7.3-soap \
+            php7.3-opcache \
+            php7.3-pdo \
+            php7.3-curl \
+            php7.3-igbinary \
+            php7.3-bz2 \
+            php7.3-geoip \
+            php7.3-imagick \
+            php7.3-imap \
+            php7.3-mcrypt \
+            php7.3-redis \
+            php7.3-xmlrpc \
+            php7.3-intl \
         && rm -rf /var/lib/apt/lists/*
 
 # Download PSR, see https://github.com/jbboehr/php-psr

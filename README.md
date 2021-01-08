@@ -1,4 +1,4 @@
-php7.0-phalcon-apache
+php7.3-phalcon-apache
 =====================
 
 A Docker image based on php7.0-apache
@@ -10,7 +10,7 @@ Extra library:
 Tags
 -----
 
-* latest: Debian Jessie 8.0 (LTS), Apache 2.4, PHP 7.0.x with support for setting `error_reporting`, PhalconPHP
+* latest: Debian Jessie 8.0 (LTS), Apache 2.4, PHP 7.3.x with support for setting `error_reporting`, PhalconPHP
 
 Usage
 ------
